@@ -11,8 +11,8 @@
   <option value="6e4">1 minute</option>
   <option value="3e5">5 minutes</option>
 </select>
-<script src="../d3.v3.min.js"></script>
-<script src="../cubism.v1.min.js"></script>
+<script src="d3.v3.min.js"></script>
+<script src="cubism.v1.min.js"></script>
 <script>
 
 //
@@ -56,7 +56,7 @@ d3.select("body").insert("div", ".bottom")
     .metric(function(d) { return d.metric; }));
 
 //
-d3.json("/1.0/types", function(types) {
+d3.json("1.0/types", function(types) {
   d3.select("body").insert("div", ".bottom")
       .attr("class", "group")
       .call(function() { this.append("header").text("incoming events (/s)"); })

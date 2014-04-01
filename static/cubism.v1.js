@@ -165,7 +165,7 @@ cubism_contextPrototype.cube = function(host) {
 
   source.metric = function(expression) {
     return context.metric(function(start, stop, step, callback) {
-      d3.json(host + "/1.0/metric"
+      d3.json(host + "1.0/metric"
           + "?expression=" + encodeURIComponent(expression)
           + "&start=" + cubism_cubeFormatDate(start)
           + "&stop=" + cubism_cubeFormatDate(stop)
