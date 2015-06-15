@@ -1,0 +1,110 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>cube</artifactId>
+  <groupId>org.extendedmind</groupId>
+  <packaging>pom</packaging>
+  <version>0.2.12.1</version>
+  <name>Extended Mind :: Cube</name>
+  <description>Extended Mind Cube</description>
+  <url>https://github.com/extendedmind/cube</url>
+  <inceptionYear>2013</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git@github.com:extendedmind/cube.git</connection>
+    <developerConnection>scm:git:git@github.com:extendedmind/cube.git</developerConnection>
+    <url>git@github.com:extendedmind/cube.git</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>mbostock</id>
+      <name>Mike Bostock</name>
+      <email>mike@ocks.org</email>
+    </developer>
+    <developer>
+      <id>ttiurani</id>
+      <name>Timo Tiuraniemi</name>
+      <email>timo.tiuraniemi@iki.fi</email>
+    </developer>
+  </developers>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jolokia</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.11.5</version>
+        <configuration>
+          <sourceDirectory>${project.basedir}/docker</sourceDirectory>
+          <images>
+            <image>
+              <name>extendedmind/cube-collector</name>
+              <alias>cube-collector</alias>
+              <build>
+                <from>node:0.12</from>
+                <maintainer>timo.tiuraniemi@iki.fi</maintainer>
+                <tags>
+                  <tag>latest</tag>
+                  <tag>${project.version}</tag>
+                </tags>
+                <ports>
+                  <port>1080</port>
+                  <port>1180</port>
+                </ports>
+                <assembly>
+                  <mode>dir</mode>
+                  <basedir>/usr/src/cube</basedir>
+                  <descriptor>cube-collector-assembly.xml</descriptor>
+                </assembly>
+                <command>cd /usr/src/cube && node /bin/collector</command>
+              </build>
+            </image>
+            <image>
+              <name>extendedmind/cube-evaluator</name>
+              <alias>cube-evaluator</alias>
+              <build>
+                <from>node:0.12</from>
+                <maintainer>timo.tiuraniemi@iki.fi</maintainer>
+                <tags>
+                  <tag>latest</tag>
+                  <tag>${project.version}</tag>
+                </tags>
+                <ports>
+                  <port>1081</port>
+                </ports>
+                <assembly>
+                  <mode>dir</mode>
+                  <basedir>/usr/src/cube</basedir>
+                  <descriptor>cube-evaluator-assembly.xml</descriptor>
+                </assembly>
+                <command>cd /usr/src/cube && node /bin/evaluator</command>
+              </build>
+            </image>
+          </images>
+        </configuration>
+        <!-- Connect start/stop to pre- and
+             post-integration-test phase, respectively if you want to start
+             your docker containers during integration tests -->
+        <executions>
+          <execution>
+             <id>build</id>
+             <phase>package</phase>
+             <goals>
+               <goal>build</goal>
+             </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
