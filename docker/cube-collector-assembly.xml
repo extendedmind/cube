@@ -10,19 +10,26 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${project.basedir}/bin</directory>
+      <directory>${project.basedir}/docker</directory>
       <outputDirectory>.</outputDirectory>
+      <includes>
+        <include>run-collector.sh</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>${project.basedir}/bin</directory>
+      <outputDirectory>bin</outputDirectory>
       <includes>
         <include>collector*.*</include>
       </includes>
     </fileSet>
     <fileSet>
       <directory>${project.basedir}/lib</directory>
-      <outputDirectory>.</outputDirectory>
+      <outputDirectory>lib</outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>${project.basedir}/static</directory>
-      <outputDirectory>.</outputDirectory>
+      <directory>${project.basedir}/node_modules</directory>
+      <outputDirectory>node_modules</outputDirectory>
     </fileSet>
   </fileSets>
 </assembly>

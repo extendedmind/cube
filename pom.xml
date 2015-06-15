@@ -41,11 +41,28 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>npm</executable>
+          <commandlineArgs>install</commandlineArgs>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <version>0.11.5</version>
         <configuration>
-          <sourceDirectory>${project.basedir}/docker</sourceDirectory>
+          <sourceDirectory>docker</sourceDirectory>
           <images>
             <image>
               <name>extendedmind/cube-collector</name>
@@ -66,7 +83,7 @@
                   <basedir>/usr/src/cube</basedir>
                   <descriptor>cube-collector-assembly.xml</descriptor>
                 </assembly>
-                <command>cd /usr/src/cube && node /bin/collector</command>
+                <command>/usr/src/cube/run-collector.sh</command>
               </build>
             </image>
             <image>
@@ -87,7 +104,7 @@
                   <basedir>/usr/src/cube</basedir>
                   <descriptor>cube-evaluator-assembly.xml</descriptor>
                 </assembly>
-                <command>cd /usr/src/cube && node /bin/evaluator</command>
+                <command>/usr/src/cube/run-evaluator.sh</command>
               </build>
             </image>
           </images>
