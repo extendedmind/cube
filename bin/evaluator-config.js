@@ -1,6 +1,6 @@
 // Default configuration for development.
 module.exports = {
-  "mongo-host": "127.0.0.1",
+  "mongo-host": process.env.MONGODB_PORT_27017_TCP_ADDR,
   "mongo-port": 27017,
   "mongo-database": "cube",
   "mongo-username": null,
