@@ -17,7 +17,7 @@
   "scripts":{"test":"./node_modules/.bin/vows"},
   "main": "./lib/cube",
   "dependencies": {
-    "mongodb": "^1.4",
+    "mongodb": "^1.4.29",
     "node-static": "0.6.5",
     "pegjs": "0.7.0",
     "vows": "0.7.0",
