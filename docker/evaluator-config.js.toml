@@ -1,0 +1,7 @@
+[template]
+src = "../templates/cube/evaluator-config.js.tmpl"
+dest = "/etc/cube/evaluator-config.js"
+keys = [
+    "/extendedmind/ha",
+    "/extendedmind/servers"
+]

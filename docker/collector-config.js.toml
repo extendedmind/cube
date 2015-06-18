@@ -1,0 +1,7 @@
+[template]
+src = "../templates/cube/collector-config.js.tmpl"
+dest = "/etc/cube/collector-config.js"
+keys = [
+    "/extendedmind/ha",
+    "/extendedmind/servers"
+]

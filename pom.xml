@@ -60,10 +60,31 @@
       <plugin>
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.11.5</version>
+        <version>0.12.0</version>
         <configuration>
           <sourceDirectory>docker</sourceDirectory>
           <images>
+            <image>
+              <name>extendedmind/cube-conf</name>
+              <alias>cube-conf</alias>
+              <build>
+                <from>ubuntu:14.04</from>
+                <maintainer>timo.tiuraniemi@iki.fi</maintainer>
+                <tags>
+                  <tag>latest</tag>
+                </tags>
+                <assembly>
+                  <mode>dir</mode>
+                  <basedir>/etc/confd</basedir>
+                  <descriptor>cube-conf-assembly.xml</descriptor>
+                </assembly>
+                <volumes>
+                  <volume>/etc/confd/conf.d/cube</volume>
+                  <volume>/etc/confd/templates/cube</volume>
+                  <volume>/etc/cube</volume>
+                </volumes>
+              </build>
+            </image>
             <image>
               <name>extendedmind/cube-collector</name>
               <alias>cube-collector</alias>
@@ -83,7 +104,7 @@
                   <basedir>/usr/src/cube</basedir>
                   <descriptor>cube-collector-assembly.xml</descriptor>
                 </assembly>
-                <command>/usr/src/cube/run-collector.sh</command>
+                <cmd><shell>/usr/src/cube/run-collector.sh /etc/cube/collector-config.js</shell></cmd>
               </build>
             </image>
             <image>
@@ -104,7 +125,7 @@
                   <basedir>/usr/src/cube</basedir>
                   <descriptor>cube-evaluator-assembly.xml</descriptor>
                 </assembly>
-                <command>/usr/src/cube/run-evaluator.sh</command>
+                <cmd><shell>/usr/src/cube/run-evaluator.sh /etc/cube/evaluator-config.js</shell></cmd>
               </build>
             </image>
           </images>

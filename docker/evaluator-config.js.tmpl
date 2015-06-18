@@ -1,0 +1,21 @@
+{{if exists "/extendedmind/ha"}}
+// For HA, use exposed ports MongoDB database
+{{$servers := getvs "/extendedmind/servers/*"}}
+module.exports = {
+  "mongo-url": "mongodb://{{join $servers ","}}/cube",
+  "mongo-options": {
+    "replicaSet": "extendedmind"
+  },
+  "http-port": 1081
+}
+{{else}}
+// Use Docker linking to connect to the MongoDB database
+module.exports = {
+  "mongo-host": process.env.MONGODB_PORT_27017_TCP_ADDR,
+  "mongo-port": 27017,
+  "mongo-database": "cube",
+  "mongo-username": null,
+  "mongo-password": null,
+  "http-port": 1081
+};
+{{end}}
