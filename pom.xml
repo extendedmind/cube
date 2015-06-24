@@ -25,7 +25,7 @@
     <url>git@github.com:extendedmind/cube.git</url>
   </scm>
 
-  <developers>
+ <developers>
     <developer>
       <id>mbostock</id>
       <name>Mike Bostock</name>
@@ -60,7 +60,7 @@
       <plugin>
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.12.0</version>
+        <version>0.12.1-SNAPSHOT</version>
         <configuration>
           <sourceDirectory>docker</sourceDirectory>
           <images>
@@ -104,7 +104,10 @@
                   <basedir>/usr/src/cube</basedir>
                   <descriptor>cube-collector-assembly.xml</descriptor>
                 </assembly>
-                <cmd><shell>/usr/src/cube/run-collector.sh /etc/cube/collector-config.js</shell></cmd>
+                <workdir>/usr/src/cube</workdir>
+                <entryPoint>
+                  <exec><arg>/usr/src/cube/run-collector.pl</arg></exec>
+                </entryPoint>
               </build>
             </image>
             <image>
@@ -125,7 +128,10 @@
                   <basedir>/usr/src/cube</basedir>
                   <descriptor>cube-evaluator-assembly.xml</descriptor>
                 </assembly>
-                <cmd><shell>/usr/src/cube/run-evaluator.sh /etc/cube/evaluator-config.js</shell></cmd>
+                <workdir>/usr/src/cube</workdir>
+                <entryPoint>
+                  <exec><arg>/usr/src/cube/run-evaluator.pl</arg></exec>
+                </entryPoint>
               </build>
             </image>
           </images>

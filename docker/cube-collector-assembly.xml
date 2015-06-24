@@ -13,7 +13,7 @@
       <directory>${project.basedir}/docker</directory>
       <outputDirectory>.</outputDirectory>
       <includes>
-        <include>run-collector.sh</include>
+        <include>run-collector.pl</include>
       </includes>
     </fileSet>
     <fileSet>
