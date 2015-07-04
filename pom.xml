@@ -60,7 +60,7 @@
       <plugin>
         <groupId>org.jolokia</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.12.1-SNAPSHOT</version>
+        <version>0.13.0</version>
         <configuration>
           <sourceDirectory>docker</sourceDirectory>
           <images>
