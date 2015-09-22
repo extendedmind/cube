@@ -89,7 +89,7 @@
               <name>extendedmind/cube-collector</name>
               <alias>cube-collector</alias>
               <build>
-                <from>node:0.12</from>
+                <from>node:4</from>
                 <maintainer>timo.tiuraniemi@iki.fi</maintainer>
                 <tags>
                   <tag>latest</tag>
@@ -114,7 +114,7 @@
               <name>extendedmind/cube-evaluator</name>
               <alias>cube-evaluator</alias>
               <build>
-                <from>node:0.12</from>
+                <from>node:4</from>
                 <maintainer>timo.tiuraniemi@iki.fi</maintainer>
                 <tags>
                   <tag>latest</tag>
